@@ -23,5 +23,7 @@ export const createEvent = (data: any) => fp(`${url}/events`, 'POST', data);
 export const createTicket = (data: any) => fp(`${url}/tickets`, 'POST', data);
 export const getEventByID = (id: number) => f(`${url}/events/${id}`);
 export const getVenues = () => f(`${url}/venues`);
+export const checkTransaction = (number: string) =>
+  f(`${url}/transactions/${number}`);
 
 export {};

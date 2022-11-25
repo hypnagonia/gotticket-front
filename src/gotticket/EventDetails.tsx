@@ -50,7 +50,7 @@ export function EventDetails(props: any) {
       <h2>Event {id}</h2>
       ({JSON.stringify(event)})
 
-<Box>
+      <Box>
       {
         <>
         {eventId && <Box align="start" pad="0">
