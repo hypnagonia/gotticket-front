@@ -1,6 +1,7 @@
 import React from 'react';
 
-const url = process.env.REACT_APP_BACKEND_URL;
+const url = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
+console.log({url}, process.env.REACT_APP_BACKEND_URL )
 console.log({ url });
 
 const f = (u: string) => {
