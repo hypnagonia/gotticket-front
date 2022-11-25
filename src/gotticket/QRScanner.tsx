@@ -34,8 +34,6 @@ export function QRScanner(props: any) {
           if (isScanned) {
             return
           }
-          console.log('success ->', data)
-
           const res = await checkTransaction(data)
 
           if (res && res.id) {
