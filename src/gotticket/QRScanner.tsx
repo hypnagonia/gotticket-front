@@ -7,10 +7,47 @@ import { Link } from "react-router-dom";
 import {useHistory} from "react-router-dom";
 
 import { useHtml5QrCodeScanner, useAvailableDevices } from 'react-html5-qrcode-reader';
+import { QrReader } from 'react-qr-reader';
 
 const html5QrCodeScannerFile = process.env.PUBLIC_URL + '/html5-qrcode.min.js';
 
 export function QRScanner(props: any) {
+const [data, setData] = useState('No result');
+
+ return (
+   <>
+     <QrReader
+        constraints={{}}
+       onResult={async (result, error) => {
+         if (!!result) {
+
+           // @ts-ignore
+           const text = result.text
+
+           const res = await checkTransaction(text)
+          console.log({text, res})
+           if (res && res.id) {
+             alert(`Found Ticket N${text}`)
+           }
+
+           setData(text);
+         }
+
+         if (!!error) {
+           console.info(error);
+         }
+       }}
+
+     />
+     <p>{data}</p>
+   </>
+ );
+}
+
+/*
+export function QRScanner(props: any) {
+
+
   const [isScanned, setIsScanned] = useState(false);
   const history = useHistory();
 
@@ -26,8 +63,7 @@ export function QRScanner(props: any) {
       // Creates anew instance of `HtmlQrcodeScanner` and renders the block.
       let html5QrcodeScanner = new Html5QrcodeScanner(
         "reader",
-        { fps: 10, qrbox: {width: 600, height: 600} },
-        /* verbose= */ false);
+        { fps: 10, qrbox: {width: 600, height: 600} }, false);
 
       html5QrcodeScanner.render(
         async (data: any) => {
@@ -56,4 +92,6 @@ export function QRScanner(props: any) {
 
     </Box>
   );
+
 }
+*/

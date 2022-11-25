@@ -18,6 +18,7 @@
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
     "react-html5-qrcode-reader": "^1.1.1",
+    "react-qr-reader": "^3.0.0-beta-1",
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-singleton-hook": "^3.1.1",
