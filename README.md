@@ -1,4 +1,3 @@
-# Harmony Explorer frontend
 
 ## Requirements
 

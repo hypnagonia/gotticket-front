@@ -16,7 +16,7 @@ import {
   Select,
   DateInput
 } from "grommet";
-import {getVenues, createEvent} from 'src/api/api'
+import {getVenues, createTicket} from 'src/api/api'
 import {useHistory} from "react-router-dom";
 
 import { Box, Calendar, Drop, Keyboard, TextInput } from 'grommet';
@@ -30,63 +30,36 @@ const MONTH_DAY_REGEXP =
 const MONTH_DAY_YEAR_REGEXP = new RegExp('^(\\d{1,2})/(\\d{1,2})/(\\d{4})$');
 
 
-export function EventCreate(props: any) {
-  const [venues, setVenue] = useState([{name: '', address: '', id: -1}]);
+export function CreateTicket(props: any) {
   const history = useHistory();
+  const {eventId}: any = useParams();
 
   const submitForm = async (formData: any) => {
 
-
-    const venue = venues.find((v) => v.name + ' - ' + v.address === formData.venue)!.id
     const data = {
-      markdown: 'none',
-      image: 'none',
-      company: 1,
       ...formData,
-      venue
+      event: eventId
     }
 
     try {
-    const res = await createEvent(data)
-    console.log({res})
+    const res = await createTicket(data)
+
     if (res && res.id) {
-      history.push(`/event/${res.id}`)
+      history.push(`/event/${eventId}`)
     }
   } catch(err) {
     console.error(err)
   }
   }
 
-  useEffect(() => {
-      const fetchData = async () => {
-          try {
-              const response = await getVenues();
-              console.log(response)
-              setVenue(response);
-          } catch (error) {
-              console.log("error", error);
-          }
-      };
-
-      fetchData();
-  }, []);
-
   return (
     <>
-      <h2>Create New Event</h2>
+      <h2>Create Ticket Type</h2>
 
   <Form onSubmit={({ value }) => submitForm(value)}>
   <FormField name="name" label="Name" required={true} />
-  <FormField
-    label="Venue"
-    name="venue"
-    component={Select}
-    options={venues.map(v => v.name + ' - ' + v.address)}
-  />
 
-  <FormField name="description" label="Description" required={true} />
-
-  <FormField name="eventDate" label="Date" component={DateInput} required={true}/>
+  <FormField name="count" label="Number of tickets" required={true} />
 
   <Button type="submit" label="Add" primary={true} />
 </Form>

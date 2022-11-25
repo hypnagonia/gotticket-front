@@ -4,46 +4,8 @@ import { Box, DataTable, Text, Spinner, Tip, Card, CardHeader, CardFooter, Butto
 import * as Icons from 'grommet-icons';
 import {getEvents} from 'src/api/api'
 import { Link } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
-/*
-
-@Entity()
-export class Event {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
-  @Column()
-  public name: string;
-
-  @Column()
-  public image: string;
-
-  @Column()
-  public description: string;
-
-  @Column()
-  public markdown: string;
-
-  @Column({ type: 'timestamptz' })
-  eventDate: Date;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @ManyToOne(() => Company, (company) => company.events)
-  company: Company;
-
-  @ManyToOne(() => Venue, (venue) => venue.events)
-  venue: Venue;
-
-  @OneToMany(() => User, (user) => user.company)
-  users: User[];
-
-  @OneToMany(() => Ticket, (ticket) => ticket.event)
-  tickets: Ticket[];
-}
-
-*/
 
 const columns = [
   {
@@ -82,6 +44,7 @@ const columns = [
 
 export function EventList(props: any) {
   const [events, setEvents] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
       const fetchData = async () => {
@@ -98,13 +61,12 @@ export function EventList(props: any) {
   }, []);
 
 
-
   return (
     <>
         <h2>Event List</h2>
 
         <Box align="start" pad="0">
-            <Button primary label="New Event" onClick={() => {}} {...props} />
+            <Button primary label="New Event" onClick={() => {history.push('/event/create')}} {...props} />
       </Box>
 
           <DataTable style={{height: '100%'}} columns={columns} data={events} />

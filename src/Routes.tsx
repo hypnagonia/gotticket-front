@@ -19,7 +19,8 @@ import { ChartsPage } from "./pages/ChartsPage";
 import { TopStatsPage } from "./pages/TopStatsPage";
 import { EventDetails} from './gotticket/EventDetails'
 import { EventList} from './gotticket/EventList'
-
+import { EventCreate} from './gotticket/EventCreate'
+import { CreateTicket } from './gotticket/CreateTicket'
 
 export function Routes() {
   return (
@@ -29,9 +30,19 @@ export function Routes() {
           <EventList />
         </Route>
 
+        <Route exact path="/event/create">
+          <EventCreate />
+        </Route>
+
+
+        <Route exact path="/event/:eventId/ticket/create">
+          <CreateTicket />
+        </Route>
+
         <Route exact path="/event/:id">
           <EventDetails />
         </Route>
+
 
         <Route exact path="/blocks">
           {/* <AllBlocksPage /> */}
