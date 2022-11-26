@@ -63,8 +63,8 @@ export function AppHeader(props: { style: CSSProperties }) {
               {/*<img src={require("../../assets/Logo.svg").default} />*/}
               {!isTabletOrMobile &&
                   <ProjectName direction={"column"} align={"start"}>
-                    GOT TICKET
-                    <Text size={"small"}>Got Ticket</Text>
+                    GOTICKET
+                    <Text size={"small"}>Goticket</Text>
                   </ProjectName>
               }
             </Box>
