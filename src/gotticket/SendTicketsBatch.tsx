@@ -62,7 +62,7 @@ export function SendTicketsBatch(props: any) {
   return (
     <>
       <h2>Send Ticket By Emails</h2>
-<Box style={{ overflow: "auto", background: 'white'}} pad='medium'>
+<Box style={{ overflow: "auto", background: 'white', maxWidth: 600}} pad='medium'>
   <Form onSubmit={({ value }) => submitForm(value)}>
 
   <FormField name="emails" label="Emails (space separated)" required={true} component={TextArea}/>
