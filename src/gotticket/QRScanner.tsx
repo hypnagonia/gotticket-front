@@ -96,12 +96,14 @@ const useTicketCallBack = async () => {
 
 
    <Box align='center'>
-      <Box align='center' style={{fontSize: 30, fontWeight: 'bold',
+
+      {ticket.status === 'issued' && <><Box align='center' style={{fontSize: 30, fontWeight: 'bold',
       width: '100%', height: '100%', color: 'white', background: 'lightgreen', paddingTop: 100, paddingBottom: 100}}
       pad='medium' onClick={() => useTicketCallBack()}>
       Accept Ticket
       </Box>
-      <br/><br/>
+      <br/><br/></>
+      }
 
       <Box align='center' style={{fontSize: 30, fontWeight: 'bold',
       width: '100%', height: '100%', color: 'white', background: 'lightblue', paddingTop: 100, paddingBottom: 100}}
