@@ -32,7 +32,7 @@ export const ticketColumns = [
 ];
 
 export function EventDetails(props: any) {
-  const [event, setEvent] = useState(null);
+  const [event, setEvent] = useState(null as any);
   const {id}: any = useParams();
   const history = useHistory();
 
@@ -57,16 +57,17 @@ export function EventDetails(props: any) {
   const eventId = event ? event.id : null
   return (
     <BaseContainer pad="0">
-      <h2>Event {id}</h2>
+      <h2>Event <b>{event ? event!.name : id}</b></h2>
       ({JSON.stringify(event)})
+      <br/><br/>
 
-      <Box style={{ overflow: "auto", background: 'white'}} pad='medium'>
       {
         <>
         {eventId && <Box align="start" pad="0">
             <Button primary label="New Ticket Type" onClick={() => {history.push(`/event/${eventId}/ticket/create`)}} {...props} />
       </Box>}
               {tickets.length ? <><h2>Ticket Types</h2>
+                <Box style={{ overflow: "auto", background: 'white'}} pad='medium'>
               <DataTable
               className={"g-table-header"}
               style={{ width: "100%", minWidth: "620px" }}
@@ -81,10 +82,9 @@ export function EventDetails(props: any) {
                 },
               }}
               alignSelf="start" columns={ticketColumns} data={tickets} />
-              </> : null}
+              </Box></> : null}
         </>
       }
-  </Box>
     </BaseContainer>
   );
 }
