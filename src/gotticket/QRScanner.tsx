@@ -39,7 +39,7 @@ const getTicket = async (ticketNumber: string) => {
 
   if (res && res.id) {
     //@ts-ignore
-    const e = await getEventByID(res.ticket.id)
+    const e = await getEventByID(res.ticket.eventId)
     setTicket(res)
     setEvent(e)
 
