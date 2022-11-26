@@ -17,8 +17,8 @@ const [data, setData] = useState('No result');
  return (
    <>
      <QrReader
-        constraints={{}}
-       onResult={async (result, error) => {
+        constraints={{facingMode: { exact: "environment" }}}
+        onResult={async (result, error) => {
          if (!!result) {
 
            // @ts-ignore
