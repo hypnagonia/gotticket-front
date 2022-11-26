@@ -1,4 +1,4 @@
-import {getEventByID} from 'src/api/api'
+import {getEventByID, getAllTickets} from 'src/api/api'
 import React, { useEffect, useState }  from "react";
 import {
   BrowserRouter as Router,
@@ -19,6 +19,29 @@ export const ticketColumns = [
   {
     property: 'count',
     header: 'Count',
+    render: (ticket: any) => {
+      return (
+      <b>{ticket.count}</b>
+      )
+    }
+  },
+  {
+    property: 'issued',
+    header: 'Issued',
+    render: (ticket: any) => {
+      return (
+      <b>{ticket.issued}</b>
+      )
+    }
+  },
+  {
+    property: 'used',
+    header: 'Activated',
+    render: (ticket: any) => {
+      return (
+      <b>{ticket.used}</b>
+      )
+    }
   },
   {
     property: 'name',
@@ -36,11 +59,22 @@ export function EventDetails(props: any) {
   const {id}: any = useParams();
   const history = useHistory();
 
+  // @ts-ignore
+  const tickets = event ? event.tickets : []
+
   useEffect(() => {
       const fetchData = async () => {
           try {
               const response = await getEventByID(id);
-              console.log(response)
+
+              for (const ticket of response.tickets) {
+                const used = await getAllTickets(ticket.id)
+                // @ts-ignore
+                ticket.used = used.filter(u => u.status === 'used').length
+                // @ts-ignore
+                ticket.issued = used.filter(u => u.status === 'issued').length
+              }
+
               setEvent(response);
           } catch (error) {
               console.log("error", error);
@@ -51,8 +85,7 @@ export function EventDetails(props: any) {
   }, []);
 
 ///event/:eventId/ticket/create
-  // @ts-ignore
-  const tickets = event ? event.tickets : []
+
   // @ts-ignore
   const eventId = event ? event.id : null
   return (

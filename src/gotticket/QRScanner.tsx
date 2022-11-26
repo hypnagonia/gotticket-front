@@ -2,7 +2,7 @@ import React, { useEffect, useState }  from "react";
 import { Add } from 'grommet-icons';
 import { Box, DataTable, Text, Spinner, Tip, Card, CardHeader, CardFooter, Button, CardBody, Meter} from "grommet";
 import * as Icons from 'grommet-icons';
-import {getEvents, checkTransaction} from 'src/api/api'
+import {getEvents, checkTransaction, useTicket} from 'src/api/api'
 import { Link } from "react-router-dom";
 import {useHistory} from "react-router-dom";
 
@@ -18,27 +18,58 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigat
   isMobile = false
 }
 
+type stateOptions = 'scanning' | 'scanned' | 'ready'
 
 export function QRScanner(props: any) {
-const [data, setData] = useState('No result');
-console.log('scanner')
+const [state, setState] = useState('ready' as stateOptions);
+const [ticket, setTicket] = useState({
+} as any);
+
+const getTicket = async (ticketNumber: string) => {
+  const res = await checkTransaction(ticketNumber)
+  if (res && res.id) {
+    setTicket(res)
+    setState('scanned');
+  }
+
+}
+
+const useTicketCallBack = async () => {
+  //@ts-ignore
+  const res = await useTicket(ticket.id)
+  if (res && res.id) {
+    alert(`Ticket ${ticket.number} has been used!`)
+    setState('ready');
+  }
+}
+
  return (
    <>
+   {state === 'ready' && <>
+   <Box align='center' pad='medium' style={{height: 200}}>
+     <Button size='large' label="Scan QR" primary={true} onClick={() => setState('scanning')}/>
+     </Box>
+   </>}
+
+   {state === 'scanned' && <>
+   <Box align='center' pad='medium' style={{height: 200}}>
+      {JSON.stringify(ticket)}
+      <Button size='large'  label="Use Ticket" primary onClick={() => useTicketCallBack()}/>
+      <br/><br/>
+     <Button size='large' label="Scan QR" primary={true} onClick={() => setState('scanning')}/>
+
+     </Box>
+
+   </>}
+
+   {(state === 'scanning') &&
      <QrReader
         constraints={isMobile ? {facingMode: { exact: "environment" }} : {}}
         onResult={async (result, error) => {
          if (!!result) {
 
            // @ts-ignore
-           const text = result.text
-
-           const res = await checkTransaction(text)
-          console.log({text, res})
-           if (res && res.id) {
-             alert(`Found Ticket N${text}`)
-           }
-
-           setData(text);
+           await getTicket(result.text)
          }
 
          if (!!error) {
@@ -47,7 +78,8 @@ console.log('scanner')
        }}
 
      />
-     <p>{data}</p>
+   }
+     <p></p>
    </>
  );
 }

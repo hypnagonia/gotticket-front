@@ -28,4 +28,8 @@ export const sendTicketBatch = (data: any) => fp(`${url}/transactions/batch`, 'P
 export const checkTransaction = (number: string) =>
   f(`${url}/transactions/${number}`);
 
+export const useTicket = (transactionId: any) => fp(`${url}/transactions/${transactionId}/use`, 'PATCH', {});
+export const getAllTickets = (ticketId: any) => f(`${url}/transactions/ticket/${ticketId}`);
+
+
 export {};

@@ -30,6 +30,11 @@ const columns = [
   {
     property: 'eventDate',
     header: 'Date',
+    render: (d: any) => (
+      <Box pad={{ vertical: 'xsmall' }}>
+        {new Date(d.eventDate).toLocaleDateString('en-US')}
+      </Box>
+    ),
   },
   {
     property: 'image',
