@@ -38,6 +38,18 @@ const columns = [
   },
   {
     property: 'image',
+    header: 'Tickets',
+    render: (d: any) => (
+      <Box pad={{ vertical: 'xsmall' }}><b>
+        {
+          //@ts-ignore
+        d.tickets &&  d.tickets.reduce((acc, b)=> acc + b.count, 0)}
+        </b>
+      </Box>
+    ),
+  },
+  {
+    property: 'image',
     header: '',
     render: (d: any) => (
       <Box pad={{ vertical: 'xsmall' }}>
