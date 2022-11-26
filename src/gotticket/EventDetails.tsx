@@ -19,6 +19,15 @@ export const ticketColumns = [
     property: 'count',
     header: 'Count',
   },
+  {
+    property: 'name',
+    header: '',
+    render: (ticket: any) => {
+      return (
+      <Link to={`/ticket/${ticket.id}/sendBatch`}>Send Tickets By Email</Link>
+      )
+    }
+  },
 ];
 
 export function EventDetails(props: any) {

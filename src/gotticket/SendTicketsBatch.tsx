@@ -15,10 +15,9 @@ import {
   RadioButtonGroup,
   Select,
   DateInput,
-  TextArea,
-  // TextInput
+  TextArea
 } from "grommet";
-import {getVenues, createTicket} from 'src/api/api'
+import {getVenues, sendTicketBatch} from 'src/api/api'
 import {useHistory} from "react-router-dom";
 
 import { Box, Calendar, Drop, Keyboard, TextInput } from 'grommet';
@@ -32,22 +31,28 @@ const MONTH_DAY_REGEXP =
 const MONTH_DAY_YEAR_REGEXP = new RegExp('^(\\d{1,2})/(\\d{1,2})/(\\d{4})$');
 
 
-export function CreateTicket(props: any) {
+export function SendTicketsBatch(props: any) {
   const history = useHistory();
-  const {eventId}: any = useParams();
+  // ticketId
+  const {id}: any = useParams();
 
   const submitForm = async (formData: any) => {
 
+    console.log({formData})
+
+    const emails = formData.emails.split(' ')
+
     const data = {
-      ...formData,
-      event: eventId
+      emails,
+      ticket: id
     }
 
     try {
-    const res = await createTicket(data)
+    const res = await sendTicketBatch(data)
 
-    if (res && res.id) {
-      history.push(`/event/${eventId}`)
+    // @ts-ignore
+    if (res && res.id || res.length) {
+      history.push(`/`)
     }
   } catch(err) {
     console.error(err)
@@ -56,14 +61,13 @@ export function CreateTicket(props: any) {
 
   return (
     <>
-      <h2>Create Ticket Type</h2>
+      <h2>Send Ticket By Emails</h2>
 
   <Form onSubmit={({ value }) => submitForm(value)}>
-  <FormField name="name" label="Name" required={true} />
 
-  <FormField name="count" label="Number of tickets" required={true} />
+  <FormField name="emails" label="Emails (space separated)" required={true} component={TextArea}/>
 
-  <Button type="submit" label="Add" primary={true} />
+  <Button type="submit" label="Send" primary={true} />
 </Form>
     </>
   );
