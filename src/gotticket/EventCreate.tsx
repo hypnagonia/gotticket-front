@@ -37,7 +37,7 @@ export function EventCreate(props: any) {
 
   const submitForm = async (formData: any) => {
 
-    const image = await new Promise((resolve, reject) => {
+    const image = formData.image.length ? await new Promise((resolve, reject) => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(formData.image[0]);
 
@@ -48,7 +48,7 @@ export function EventCreate(props: any) {
         fileReader.onerror = (error) => {
             reject(error);
         };
-    });
+    }) : Promise.resolve(null);
 
     const venue = venues.find((v) => v.name + ' - ' + v.address === formData.venue)!.id
     const data = {
