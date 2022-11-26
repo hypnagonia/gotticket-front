@@ -98,7 +98,7 @@ export function EventCreate(props: any) {
     options={venues.map(v => v.name + ' - ' + v.address)}
   />
 
-  <FormField name="image" label="Image" component={FileInput} required={true}/>
+  <FormField name="image" label="Image" component={FileInput}/>
 
 
   <FormField name="description" label="Description" required={true} />
