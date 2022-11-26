@@ -54,8 +54,9 @@ const ticketDetails = event.id && ticket.id ?
 [
   ['Event', event.name + ' ' + event.venue.name + ', ' + event.venue.address],
   ['Date', event.eventDate],
-  ['Ticket Number', ticket.number],
-  ['Ticket Status', <Box pad='small'
+  ['Number', ticket.number],
+  ['Type', ticket.name],
+  ['Status', <Box pad='small'
   style={{color: 'white', background: ticket.status==='issued' ? 'lightgreen' : 'red'}}>{ticket.status}</Box>],
 ] : null
 

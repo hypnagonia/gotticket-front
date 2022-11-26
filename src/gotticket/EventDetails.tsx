@@ -24,7 +24,7 @@ export const ticketColumns = [
   },
   {
     property: 'count',
-    header: 'Count',
+    header: 'Total',
     render: (ticket: any) => {
       return (
       <b>{ticket.count}</b>
