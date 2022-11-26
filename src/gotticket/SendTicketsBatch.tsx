@@ -19,6 +19,7 @@ import {
 } from "grommet";
 import {getVenues, sendTicketBatch} from 'src/api/api'
 import {useHistory} from "react-router-dom";
+import { toaster } from "../App";
 
 import { Box, Calendar, Drop, Keyboard, TextInput } from 'grommet';
 
@@ -50,6 +51,9 @@ export function SendTicketsBatch(props: any) {
     try {
     const res = await sendTicketBatch(data)
 
+    toaster.show({
+      message: `Sent ${emails.length} ticket(s)`
+    })
     // @ts-ignore
     if (res && res.id || res.length) {
       history.push(`/`)
