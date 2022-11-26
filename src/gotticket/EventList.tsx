@@ -68,7 +68,8 @@ export function EventList(props: any) {
           try {
               const response = await getEvents();
               console.log(response)
-              setEvents(response);
+              // @ts-ignore
+              setEvents(response.sort((a,b)=>b.id-a.id));
           } catch (error) {
               console.log("error", error);
           }
