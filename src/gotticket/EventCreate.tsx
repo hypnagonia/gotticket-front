@@ -87,8 +87,9 @@ export function EventCreate(props: any) {
   <FormField name="description" label="Description" required={true} />
 
   <FormField name="eventDate" label="Date" component={DateInput} required={true}/>
-
+<Box align='center' pad='small' style={{marginTop: 20}}>
   <Button type="submit" label="Add" primary={true} />
+  </Box>
 </Form>
 </Box>
     </>

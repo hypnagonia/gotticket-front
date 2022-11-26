@@ -62,8 +62,9 @@ export function CreateTicket(props: any) {
   <FormField name="name" label="Name" required={true} />
 
   <FormField name="count" label="Number of tickets" required={true} />
-
+<Box align='center' pad='small' style={{marginTop: 20}}>
   <Button type="submit" label="Add" primary={true} />
+  </Box>
 </Form>
 </Box>
     </>
