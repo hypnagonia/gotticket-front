@@ -10,12 +10,12 @@ import {useHistory} from "react-router-dom";
 const columns = [
   {
     property: 'id',
-    header: <Text>ID</Text>,
+    header: <Text>#</Text>,
     primary: true,
   },
   {
     property: 'name',
-    header: 'Name',
+    header: 'Event Name',
     render: (e :any) => {
       return <>  <Link to={`/event/${e.id}`}>{e.name}</Link></>
     }
@@ -68,7 +68,7 @@ export function EventList(props: any) {
 
   return (
     <Box>
-        <h2>Event List</h2>
+        <h2>Events</h2>
 
         <Box align="start" pad="0">
 
