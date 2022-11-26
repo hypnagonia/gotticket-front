@@ -11,13 +11,21 @@ import { QrReader } from 'react-qr-reader';
 
 const html5QrCodeScannerFile = process.env.PUBLIC_URL + '/html5-qrcode.min.js';
 
+let isMobile = true
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  isMobile = true
+}else{
+  isMobile = false
+}
+
+
 export function QRScanner(props: any) {
 const [data, setData] = useState('No result');
-
+console.log('scanner')
  return (
    <>
      <QrReader
-        constraints={{facingMode: { exact: "environment" }}}
+        constraints={isMobile ? {facingMode: { exact: "environment" }} : {}}
         onResult={async (result, error) => {
          if (!!result) {
 

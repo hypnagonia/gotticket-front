@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from "react";
 import { Add } from 'grommet-icons';
-import { Box, DataTable, Text, Spinner, Tip, Card, CardHeader, CardFooter, Button, CardBody, Meter} from "grommet";
+import { Grid, Box, DataTable, Text, Spinner, Tip, Card, CardHeader, CardFooter, Button, CardBody, Meter} from "grommet";
 import * as Icons from 'grommet-icons';
 import {getEvents} from 'src/api/api'
 import { Link } from "react-router-dom";
@@ -66,8 +66,22 @@ export function EventList(props: any) {
         <h2>Event List</h2>
 
         <Box align="start" pad="0">
-            <Button primary label="New Event" onClick={() => {history.push('/event/create')}} {...props} />
-      </Box>
+
+        <Grid
+rows={['xxsmall', 'xxsmall']}
+columns={['small', 'small']}
+gap="small"
+areas={[
+{ name: 'header', start: [0, 0], end: [1, 0] },
+{ name: 'nav', start: [0, 1], end: [0, 1] },
+{ name: 'main', start: [1, 1], end: [1, 1] },
+]}
+>
+<Button primary label="Scanner" onClick={() => {history.push('/scanner')}} {...props} />
+<Button primary label="New Event" onClick={() => {history.push('/event/create')}} {...props} />
+</Grid>
+
+            </Box>
 
           <DataTable style={{height: '100%'}} columns={columns} data={events} />
 
