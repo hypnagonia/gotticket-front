@@ -39,6 +39,7 @@ const getTicket = async (ticketNumber: string) => {
 
   if (res && res.id) {
     //@ts-ignore
+    console.log({res})
     const e = await getEventByID(res.ticket.eventId)
     setTicket(res)
     setEvent(e)
@@ -53,7 +54,7 @@ const ticketDetails = event.id && ticket.id ?
   ['Date', event.eventDate],
   ['Ticket Number', ticket.number],
   ['Ticket Status', <Box pad='small'
-  style={{color: 'white', background: ticket.status==='issued' ? 'lightgreen' : 'lightred'}}>{ticket.status}</Box>],
+  style={{color: 'white', background: ticket.status==='issued' ? 'lightgreen' : 'red'}}>{ticket.status}</Box>],
 ] : null
 
 const useTicketCallBack = async () => {
