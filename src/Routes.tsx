@@ -6,6 +6,7 @@ import { EventList} from './gotticket/EventList'
 import { EventCreate} from './gotticket/EventCreate'
 import { CreateTicket } from './gotticket/CreateTicket'
 import { QRScanner } from './gotticket/QRScanner'
+import { QRChecker } from './gotticket/QRChecker'
 
 export function Routes() {
   return (
@@ -29,6 +30,10 @@ export function Routes() {
 
         <Route exact path="/scanner">
           <QRScanner />
+        </Route>
+
+        <Route exact path="/scanner/:id">
+          <QRChecker />
         </Route>
 
         <Route path="*">
