@@ -7,7 +7,7 @@ import { Box, DataTable, Text, Spinner, Tip,
   TableRow,
   Card, CardHeader, CardFooter, Button, CardBody, Meter} from "grommet";
 import * as Icons from 'grommet-icons';
-import {getEvents, checkTransaction, useTicket} from 'src/api/api'
+import {getEvents, checkTransaction, useTicket, getEventByID} from 'src/api/api'
 import { Link } from "react-router-dom";
 import {useHistory} from "react-router-dom";
 
