@@ -14,7 +14,8 @@ import {
   FormField,
   RadioButtonGroup,
   Select,
-  DateInput
+  DateInput,
+  FileInput
 } from "grommet";
 import {getVenues, createEvent} from 'src/api/api'
 import {useHistory} from "react-router-dom";
@@ -36,13 +37,26 @@ export function EventCreate(props: any) {
 
   const submitForm = async (formData: any) => {
 
+    const image = await new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(formData.image[0]);
+
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
+
+        fileReader.onerror = (error) => {
+            reject(error);
+        };
+    });
 
     const venue = venues.find((v) => v.name + ' - ' + v.address === formData.venue)!.id
     const data = {
       markdown: 'none',
-      image: 'none',
+      // @ts-ignore
       company: 1,
       ...formData,
+      image,
       venue
     }
 
@@ -83,6 +97,9 @@ export function EventCreate(props: any) {
     component={Select}
     options={venues.map(v => v.name + ' - ' + v.address)}
   />
+
+  <FormField name="image" label="Image" component={FileInput} required={true}/>
+
 
   <FormField name="description" label="Description" required={true} />
 

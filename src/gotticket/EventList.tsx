@@ -16,8 +16,22 @@ const columns = [
   {
     property: 'name',
     header: 'Event Name',
+    // todo 
     render: (e :any) => {
-      return <>  <Link to={`/event/${e.id}`}>{e.name}</Link></>
+      return <>
+      <Grid
+      style={{height:50}}
+      rows={['xxsmall', 'xxsmall']}
+      columns={['xxsmall', 'xxsmall']}
+      >
+      {typeof e.image === 'string' && e.image.includes('data') &&
+        <Box style={{height: 50, width:50, marginTop:5}}>
+        <img src={e.image}/></Box>}
+        <Box style={{marginTop: 15, marginLeft: 25, maxWidth: 10}}>
+      <Link to={`/event/${e.id}`}>{e.name}</Link>
+      </Box>
+      </Grid>
+      </>
     }
   },
   {

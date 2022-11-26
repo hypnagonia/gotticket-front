@@ -12,6 +12,7 @@ Table,
 TableBody,
 TableCell,
 TableRow,
+Grid,
   CardHeader, CardFooter, Button, CardBody, Meter} from "grommet";
 import {useHistory} from "react-router-dom";
 import {BaseContainer} from './ui/BaseContainer'
@@ -67,9 +68,9 @@ export function EventDetails(props: any) {
 
   const eventData = event ? [
     {a:'When', b:event.eventDate},
-        {a:'Venue', b:event.venue.name + ', ' + event.venue.address},
+        {a:'Venue', b: 'At ' + event.venue.name + ', ' + event.venue.address},
         {a:'Description',b: event.description},
-        {a:'Promoter', b:event.company.name}
+        {a:'Promoter', b: 'By ' + event.company.name}
   ] : null
 
   // @ts-ignore
@@ -109,14 +110,24 @@ export function EventDetails(props: any) {
 {eventData ? <>
 <Box style={{ overflow: "auto", background: 'white'}} pad='medium'>
 
+<Grid columns={['small', 'medium']} rows="small" gap="medium">
+{typeof event.image === 'string' && event.image.includes('data') &&
+  <Box
+  style={{height: 250, width:300}}>
+  <img src={event.image}/></Box>}
+
+  <Box>
 <Table style={{maxWidth: 600, fontSize: 16}}>
     <TableBody>
         {eventData && eventData.map(datum => <TableRow>
-          <TableCell>{datum.a}</TableCell>
+          {/*<TableCell>{datum.a}</TableCell>*/}
           <TableCell style={{textTransform: 'capitalize'}}><b>{datum.b}</b></TableCell>
         </TableRow>)}
     </TableBody>
   </Table>
+  </Box>
+  </Grid>
+
 </Box>
 <br/>
   </>: null}
