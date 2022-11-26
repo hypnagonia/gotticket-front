@@ -40,7 +40,7 @@ export function CreateTicket(props: any) {
 
     const data = {
       ...formData,
-      event: eventId
+      eventId: eventId
     }
 
     try {

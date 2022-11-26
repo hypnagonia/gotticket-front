@@ -25,6 +25,8 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigat
 
 type stateOptions = 'scanning' | 'scanned' | 'ready'
 
+
+// todo ticket counter
 export function QRScanner(props: any) {
 const [state, setState] = useState('ready' as stateOptions);
 
@@ -133,59 +135,7 @@ const useTicketCallBack = async () => {
 
      />
    }
-     <p></p>
+
    </>
  );
 }
-
-/*
-export function QRScanner(props: any) {
-
-
-  const [isScanned, setIsScanned] = useState(false);
-  const history = useHistory();
-
-  const { Html5QrcodeScanner } = useHtml5QrCodeScanner(
-    html5QrCodeScannerFile
-  );
-  const { devices, error } = useAvailableDevices(
-    html5QrCodeScannerFile
-  );
-
-  useEffect(() => {
-    if (Html5QrcodeScanner) {
-      // Creates anew instance of `HtmlQrcodeScanner` and renders the block.
-      let html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader",
-        { fps: 10, qrbox: {width: 600, height: 600} }, false);
-
-      html5QrcodeScanner.render(
-        async (data: any) => {
-          if (isScanned) {
-            return
-          }
-          const res = await checkTransaction(data)
-
-          if (res && res.id) {
-            alert(`Found Ticket N${data}`)
-          }
-          setIsScanned(true)
-          console.log({res})
-        }
-        // (err: any) => console.log('err ->', err)
-      );
-    }
-  }, [Html5QrcodeScanner]);
-
-
-  return (
-    <Box style={{height: '100%'}}>
-        <h2>QR Scanner</h2>
-
-        <div id="reader" style={{width: '100%', height: '100%'}}></div>
-
-    </Box>
-  );
-
-}
-*/
