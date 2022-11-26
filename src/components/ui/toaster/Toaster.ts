@@ -15,7 +15,7 @@ export class Toaster {
   public updateComponent!: Function;
 
   show(options: IToasterOption) {
-    const { time = 3000 } = options;
+    const { time = 20000 } = options;
     this.currentSelected.push(options);
     this.updateComponent();
 

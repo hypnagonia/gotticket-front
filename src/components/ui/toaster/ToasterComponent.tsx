@@ -8,12 +8,12 @@ const Wrapper = styled(Box)`
 `;
 
 const animation = keyframes`
-  from { 
+  from {
   transform: translateY(100%);
   visibility: visible;
   }
 
-  to { 
+  to {
   transform: translateY(0);
   }
 `;
@@ -55,15 +55,14 @@ export class ToasterComponent extends React.Component<IToasterComponentProps> {
               return (
                 <ToasterItem
                   key={index}
-                  background={"backgroundToaster"}
-                  pad={"xsmall"}
+                  background={"yellow"}
+                  pad={"small"}
                   index={index}
                   style={{
-                    borderRadius: "6px",
-                    marginBottom: `${index * 70 + 10}px`,
+                    marginBottom: `${index * 70 + 20}px`,
                   }}
                 >
-                  <Text color={"headerText"}>
+                  <Text color={"headerText"} style={{fontSize:11, color: 'black'}}>
                     {typeof item.message === "function"
                       ? item.message()
                       : item.message}

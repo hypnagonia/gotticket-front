@@ -1,11 +1,18 @@
 import React from 'react';
+import { toaster } from "../App";
 
 const url = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
-console.log({url}, process.env.REACT_APP_BACKEND_URL )
+
 console.log({ url });
 
 const f = (u: string) => {
-  return fetch(u).then((r) => r.json());
+  return fetch(u).then((r) => r.json()).catch(err => {
+    toaster.show({
+      message: err
+    })
+
+    return err
+  });
 };
 
 const fp = (u: string, method = 'POST', data: any) => {
@@ -16,8 +23,25 @@ const fp = (u: string, method = 'POST', data: any) => {
     },
     method: method,
     body: JSON.stringify(data),
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    const parsed = await r.json()
+
+    if (r.status >= 400) {
+        toaster.show({
+          message: JSON.stringify(parsed)
+        })
+    }
+    return parsed
+  }).catch(err => {
+    toaster.show({
+      message: err
+    })
+
+    return err
+  });
 };
+
+
 
 export const getEvents = () => f(`${url}/events`);
 export const createEvent = (data: any) => fp(`${url}/events`, 'POST', data);
