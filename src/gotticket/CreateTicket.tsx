@@ -57,7 +57,7 @@ export function CreateTicket(props: any) {
   return (
     <>
       <h2>Create Ticket Type</h2>
-
+<Box style={{ overflow: "auto", background: 'white', marginTop: 0, maxWidth: 600}} pad='medium'>
   <Form onSubmit={({ value }) => submitForm(value)}>
   <FormField name="name" label="Name" required={true} />
 
@@ -65,6 +65,7 @@ export function CreateTicket(props: any) {
 
   <Button type="submit" label="Add" primary={true} />
 </Form>
+</Box>
     </>
   );
 }

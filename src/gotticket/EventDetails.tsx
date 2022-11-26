@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { Box, DataTable, Text, Spinner, Tip, Card, CardHeader, CardFooter, Button, CardBody, Meter} from "grommet";
 import {useHistory} from "react-router-dom";
+import {BaseContainer} from './ui/BaseContainer'
 
 export const ticketColumns = [
   {
@@ -55,22 +56,35 @@ export function EventDetails(props: any) {
   // @ts-ignore
   const eventId = event ? event.id : null
   return (
-    <>
+    <BaseContainer pad="0">
       <h2>Event {id}</h2>
       ({JSON.stringify(event)})
 
-      <Box>
+      <Box style={{ overflow: "auto", background: 'white'}} pad='medium'>
       {
         <>
         {eventId && <Box align="start" pad="0">
             <Button primary label="New Ticket Type" onClick={() => {history.push(`/event/${eventId}/ticket/create`)}} {...props} />
       </Box>}
               {tickets.length ? <><h2>Ticket Types</h2>
-              <DataTable alignSelf="start" style={{height: '100%'}} columns={ticketColumns} data={tickets} />
+              <DataTable
+              className={"g-table-header"}
+              style={{ width: "100%", minWidth: "620px" }}
+              border={{
+                header: {
+                  color: "brand",
+                },
+                body: {
+                  color: "border",
+                  side: "top",
+                  size: "1px",
+                },
+              }}
+              alignSelf="start" columns={ticketColumns} data={tickets} />
               </> : null}
         </>
       }
   </Box>
-    </>
+    </BaseContainer>
   );
 }

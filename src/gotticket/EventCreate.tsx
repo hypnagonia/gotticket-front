@@ -74,7 +74,7 @@ export function EventCreate(props: any) {
   return (
     <>
       <h2>Create New Event</h2>
-
+<Box style={{ overflow: "auto", background: 'white', marginTop: 0, maxWidth: 600}} pad='medium'>
   <Form onSubmit={({ value }) => submitForm(value)}>
   <FormField name="name" label="Name" required={true} />
   <FormField
@@ -90,6 +90,7 @@ export function EventCreate(props: any) {
 
   <Button type="submit" label="Add" primary={true} />
 </Form>
+</Box>
     </>
   );
 }

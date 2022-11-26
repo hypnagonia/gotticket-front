@@ -62,29 +62,25 @@ export function EventList(props: any) {
 
 
   return (
-    <>
+    <Box>
         <h2>Event List</h2>
 
         <Box align="start" pad="0">
 
         <Grid
+        style={{height:70}}
 rows={['xxsmall', 'xxsmall']}
 columns={['small', 'small']}
 gap="small"
-areas={[
-{ name: 'header', start: [0, 0], end: [1, 0] },
-{ name: 'nav', start: [0, 1], end: [0, 1] },
-{ name: 'main', start: [1, 1], end: [1, 1] },
-]}
 >
 <Button primary label="Scanner" onClick={() => {history.push('/scanner')}} {...props} />
 <Button primary label="New Event" onClick={() => {history.push('/event/create')}} {...props} />
 </Grid>
 
             </Box>
-
-          <DataTable style={{height: '100%'}} columns={columns} data={events} />
-
-    </>
+<Box style={{ overflow: "auto", background: 'white', marginTop: 0}} pad='medium'>
+          <DataTable style={{height: '100%', marginTop: 0}} columns={columns} data={events} />
+</Box>
+    </Box>
   );
 }
