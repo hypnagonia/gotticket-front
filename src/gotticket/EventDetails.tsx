@@ -67,7 +67,7 @@ export function EventDetails(props: any) {
 
   const eventData = event ? [
     {a:'When', b:event.eventDate},
-        {a:'Venue', b:event.venue.name + ', ' + b:event.venue.address},
+        {a:'Venue', b:event.venue.name + ', ' + event.venue.address},
         {a:'Description',b: event.description},
         {a:'Promoter', b:event.company.name}
   ] : null
@@ -103,7 +103,7 @@ export function EventDetails(props: any) {
   const eventId = event ? event.id : null
   return (
     <BaseContainer pad="0">
-      {event ? <h2 style={{textTransform: 'capitalize'}}><b>{event!.name}</b> at&nbsp;
+      {event ? <h2 style={{textTransform: 'capitalize'}}>Event <b>{event!.name}</b> at&nbsp;
       <b>{event.venue.name}, {event.venue.address}</b></h2> : null}
 <>
 {eventData ? <>
