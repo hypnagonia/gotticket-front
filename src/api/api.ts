@@ -5,40 +5,38 @@ const url = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
 
 console.log({ url });
 
-const f = (u: string) => {
-  return fetch(u).then((r) => r.json()).catch(err => {
-    toaster.show({
-      message: err
-    })
+const showToaster = (data: any) => {
+  toaster.show({
+    message: JSON.stringify(data)
+  })
 
-    return err
-  });
+  return data
+}
+
+const toJson = async (r: any) => {
+  const parsed = await r.json()
+
+  if (r.status >= 400) {
+      showToaster(parsed)
+  }
+
+  return parsed
+}
+
+const f = (u: string) => {
+  return fetch(u).then(toJson).catch(showToaster);
 };
 
+const headers = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+}
 const fp = (u: string, method = 'POST', data: any) => {
   return fetch(u, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers,
     method: method,
     body: JSON.stringify(data),
-  }).then(async (r) => {
-    const parsed = await r.json()
-
-    if (r.status >= 400) {
-        toaster.show({
-          message: JSON.stringify(parsed)
-        })
-    }
-    return parsed
-  }).catch(err => {
-    toaster.show({
-      message: err
-    })
-
-    return err
-  });
+  }).then(toJson).catch(showToaster);
 };
 
 

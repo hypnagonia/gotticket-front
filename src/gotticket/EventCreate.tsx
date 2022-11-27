@@ -52,7 +52,7 @@ export function EventCreate(props: any) {
 
     const venue = venues.find((v) => v.name + ' - ' + v.address === formData.venue)!.id
     const data = {
-      markdown: 'none',
+      markdown: '',
       // @ts-ignore
       company: 1,
       ...formData,
