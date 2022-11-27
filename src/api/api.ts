@@ -7,7 +7,7 @@ console.log({ url });
 
 const showToaster = (data: any) => {
   toaster.show({
-    message: JSON.stringify(data)
+    message: typeof data === 'string' ? data : JSON.stringify(data)
   })
 
   return data
@@ -21,6 +21,11 @@ const toJson = async (r: any) => {
   }
 
   return parsed
+}
+
+const OKToast = (data: any) => {
+  showToaster('OK')
+  return data
 }
 
 const f = (u: string) => {
@@ -42,8 +47,8 @@ const fp = (u: string, method = 'POST', data: any) => {
 
 
 export const getEvents = () => f(`${url}/events`);
-export const createEvent = (data: any) => fp(`${url}/events`, 'POST', data);
-export const createTicket = (data: any) => fp(`${url}/tickets`, 'POST', data);
+export const createEvent = (data: any) => fp(`${url}/events`, 'POST', data).then(OKToast);
+export const createTicket = (data: any) => fp(`${url}/tickets`, 'POST', data).then(OKToast);
 export const getEventByID = (id: number) => f(`${url}/events/${id}`);
 export const getVenues = () => f(`${url}/venues`);
 export const sendTicketBatch = (data: any) => fp(`${url}/transactions/batch`, 'POST', data);
