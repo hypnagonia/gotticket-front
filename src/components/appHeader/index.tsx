@@ -61,12 +61,12 @@ export function AppHeader(props: { style: CSSProperties }) {
           >
             <Box direction={"row"} align={"center"}>
               {/*<img src={require("../../assets/Logo.svg").default} />*/}
-              {!isTabletOrMobile &&
+
                   <ProjectName direction={"column"} align={"start"}>
                     GOTICKET
                     <Text size={"small"}>Goticket</Text>
                   </ProjectName>
-              }
+              
             </Box>
           </Heading>
 
