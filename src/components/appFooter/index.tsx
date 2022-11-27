@@ -22,9 +22,8 @@ export function AppFooter(props: { style: CSSProperties }) {
         <Box direction="row" width="320px" justify="center" align="center" gap="medium">
 
         <Box direction="row" justify="center" align="center" gap="xsmall">
-          <Text color="minorText" size="xsmall" margin={{ top: '3px' }}>©</Text>
-          <Text color="minorText" size="xsmall">Goticket {new Date().getFullYear()}</Text>
-          <Text color="minorText" size="small" margin={{ bottom: '6px' }}>.</Text>
+          <Text color="minorText" size="xsmall"><b>i@goticket.am</b></Text>
+          <Text color="minorText" size="xsmall">{new Date().getFullYear()}</Text>
 
         </Box>
       </Box>
